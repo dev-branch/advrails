@@ -1,0 +1,35 @@
+<h1 class="display-4 p-2">Logs</h1>
+
+<div class="row">
+  <div class="col-3">
+    <div style="border: 3px dashed blue; margin-bottom: 10px; font-size: 25px; background-color: #dddddd; text-align: center; padding: 25px;">
+      <%= pager(@page, @count, @pages) %>
+    </div>
+  </div>
+  <div class="col-9"></div>
+</div>
+
+<table class="table table-striped" style="table-layout:fixed">
+  <thead class="thead-inverse">
+    <tr>
+      <th>Email</th>
+      <th>Role</th>
+      <th>Controller</th>
+      <th>Action</th>
+      <th>Params</th>
+      <th>Datetime</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @logs.each do |l| %>
+      <tr>
+        <td><%= l['email'] %></td>
+        <td><%= l['role'] %></td>
+        <td><%= l['controller'] %></td>
+        <td><%= l['action'] %></td>
+        <td style="overflow: scroll; word-wrap: break-word;"><%= l['params'] %></td>
+        <td ><%= l['datetime'] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

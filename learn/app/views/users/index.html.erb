@@ -1,0 +1,24 @@
+<h1 class="display-4 p-2">Users</h1>
+
+<a href="/users/edit_role" class="btn btn-outline-primary m-2">
+  <i class="fa fa-wrench"></i> Change Role
+</a>
+
+<table class="table table-striped">
+  <thead class="thead-inverse">
+    <tr>
+      <th>Id</th>
+      <th>Email</th>
+      <th>Role</th>
+      </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |u| %>
+      <tr>
+        <td><%= u.id %></td>
+        <td><%= u.email %></td>
+        <td><%= u.role %></td>
+        </tr>
+      <% end %>
+  </tbody>
+</table>
