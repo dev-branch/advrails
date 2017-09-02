@@ -3,6 +3,6 @@ class LogAuthJob < ApplicationJob
 
   def perform(*args)
     data = args.first
-    HTTParty.post('http://localhost:3000/logs', {body: {log: data}})
+    HTTParty.post('http://logger:5555/logs', {body: {log: data}})
   end
 end
