@@ -1,0 +1,43 @@
+version: '3'
+services:
+  web:
+    build:
+      context: ./learn
+      dockerfile: Dockerfile-dev
+    depends_on:
+      - pg
+      - redis
+      - logger
+    ports:
+     - "3333:3333"
+    environment:
+      - PGPASSWORD=pass1234
+      - REDIS_URL=redis://redis:6379/0
+    # command: ["sleep", "infinity"]
+    command: ["./scripts/start-dev.sh", "rails", "server"]
+    # command: ["rails", "server"]
+  worker:
+    image: advrails_web
+    depends_on:
+      - pg
+      - redis
+      - logger
+    command: ["sleep", "infinity"]
+    # command: ["rails", "server"]
+  logger:
+    build:
+      context: ./logger
+      dockerfile: Dockerfile-dev
+    depends_on:
+      - pg
+    ports:
+      - "5555:5555"
+    command: ["sleep", "infinity"]
+    # command: ["./scripts/start-dev.sh"]
+    # command: ["rails", "server"]
+  pg:
+    image: "postgres"
+    environment:
+      - POSTGRES_PASSWORD=pass1234
+  redis:
+    image: "redis"
