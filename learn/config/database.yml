@@ -16,7 +16,7 @@
 #
 default: &default
   username: postgres
-  password: pass1234
+  password: <%= ENV['PGPASSWORD'] %>
   host: pg
   template: template0
   adapter: postgresql
