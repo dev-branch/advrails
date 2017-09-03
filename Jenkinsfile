@@ -20,7 +20,7 @@ pipeline {
           echo "running rspec tests"
           docker images
           docker ps -a
-          docker-compose run web ./scripts/start-dev.sh rspec
+          docker-compose run web ./scripts/start-dev.sh rspec -f d
         '''
       }
     }
