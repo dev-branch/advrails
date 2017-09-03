@@ -4,12 +4,13 @@ pipeline {
     ACR_PASS = credentials('ACR_PASS')
   }
   stages {
-    stage('build dev') {
+    stage('build') {
       steps {
         sh '''
           echo "building dev docker compose infrastructure"
           docker-compose build
           docker system prune -f
+          docker images
         '''
       }
     }
@@ -17,6 +18,7 @@ pipeline {
       steps {
         sh '''
           echo "running rspec tests"
+          docker-compose up test
         '''
       }
     }
