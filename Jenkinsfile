@@ -10,7 +10,6 @@ pipeline {
           echo "building dev docker compose infrastructure"
           docker-compose build
           docker system prune -f
-          docker images
         '''
       }
     }
@@ -18,6 +17,8 @@ pipeline {
       steps {
         sh '''
           echo "running rspec tests"
+          docker images
+          docker ps -a
           docker-compose run web rspec
         '''
       }
