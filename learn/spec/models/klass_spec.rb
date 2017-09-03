@@ -19,7 +19,7 @@ RSpec.describe Klass, type: :model do
     it 'instantiates a Klass object' do
       c = Klass.new
       expect(c.is_a?(Klass)).to be true
-      expect(c.attributes.keys.count).to eql(8)
+      expect(c.attributes.keys.count).to eql(18)
     end
   end
 
