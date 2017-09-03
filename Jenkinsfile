@@ -7,7 +7,7 @@ pipeline {
     stage('build dev') {
       steps {
         sh '''
-          echo "building development docker container image"
+          echo "building development docker container image 1"
         '''
       }
     }
