@@ -10,6 +10,7 @@ pipeline {
           echo "building dev docker compose infrastructure"
           docker-compose build
           docker system prune -f
+          docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)
         '''
       }
     }
