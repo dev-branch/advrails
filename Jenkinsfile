@@ -7,7 +7,9 @@ pipeline {
     stage('build dev') {
       steps {
         sh '''
-          echo "building development docker container image 1"
+          echo "building dev docker compose infrastructure"
+          docker-compose build
+          docker system prune -f
         '''
       }
     }
@@ -21,8 +23,7 @@ pipeline {
   }
   post {
     always {
-      echo "pruning docker images from system"
-      sh '''docker system prune -f'''
+      echo "always"
     }
     success {
       echo "success"
