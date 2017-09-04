@@ -26,7 +26,10 @@ spec:
         image: chyld/web:10
         env:
         - name: PGPASSWORD
-          value: efe6358aa3
+          valueFrom:
+            secretKeyRef:
+              name: topsecret
+              key: pgpassword
         - name: REDIS_URL
           value: redis://redis:6379/0
         ports:
@@ -41,7 +44,10 @@ spec:
         image: chyld/web:10
         env:
         - name: PGPASSWORD
-          value: efe6358aa3
+          valueFrom:
+            secretKeyRef:
+              name: topsecret
+              key: pgpassword
         - name: REDIS_URL
           value: redis://redis:6379/0
         - name: AZURE_URL
@@ -51,7 +57,10 @@ spec:
         - name: AZURE_CONTAINER
           value: photos
         - name: AZURE_KEY
-          value: uLfpKbW4UpElKZoqFmoeXw7LwXQZ6iTbtKHGiMZ8h5bwLVDLmFVX3VMsPw1rb+SxmgdaPYbMApXYe0c+Sz0O0A==
+          valueFrom:
+            secretKeyRef:
+              name: topsecret
+              key: azurestorageaccountkey
         volumeMounts:
         - mountPath: /usr/src/app/uploads
           name: photos
@@ -76,7 +85,10 @@ spec:
         image: chyld/web:10
         env:
         - name: PGPASSWORD
-          value: efe6358aa3
+          valueFrom:
+            secretKeyRef:
+              name: topsecret
+              key: pgpassword
         - name: REDIS_URL
           value: redis://redis:6379/0
         command: ["./scripts/setup-db.sh"]
@@ -104,7 +116,10 @@ spec:
         image: chyld/logger:7
         env:
         - name: PGPASSWORD
-          value: efe6358aa3
+          valueFrom:
+            secretKeyRef:
+              name: topsecret
+              key: pgpassword
         ports:
         - containerPort: 5555
         command: ["./scripts/start-dev.sh"]
@@ -134,7 +149,10 @@ spec:
         - containerPort: 5432
         env:
         - name: POSTGRES_PASSWORD
-          value: efe6358aa3
+          valueFrom:
+            secretKeyRef:
+              name: topsecret
+              key: pgpassword
 
 ### -------------------------------------------------------------------------------------------------------------------- ###
 ### -------------------------------------------------------------------------------------------------------------------- ###
