@@ -37,12 +37,13 @@ gem 'jquery-rails'
 gem 'bootstrap', '~> 4.0.0.beta'
 gem 'font-awesome-sass'
 gem 'httparty'
+gem 'awesome_print'
+gem 'faker'
 
 group :development, :test do
   gem 'pry'
   gem 'pry-byebug'
   gem 'pry-rails'
-  gem 'faker'
   gem 'annotate'
   gem 'railroady'
   gem 'launchy'
@@ -55,7 +56,6 @@ group :development, :test do
   gem 'selenium-webdriver'
   gem 'simplecov'
   gem 'factory_girl_rails'
-  gem 'awesome_print'
   gem "better_errors"
   gem "binding_of_caller"
 

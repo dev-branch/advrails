@@ -18,7 +18,7 @@ spec:
           readOnly: false
       containers:
       - name: web
-        image: chyld/web:6
+        image: chyld/web:10
         env:
         - name: PGPASSWORD
           value: efe6358aa3
@@ -29,11 +29,11 @@ spec:
         volumeMounts:
         - mountPath: /usr/src/app/uploads
           name: photos
-        command: ["./scripts/start-dev.sh"]
+        command: ["./scripts/wait-servers.sh"]
         args: ["rails", "server"]
 
       - name: worker
-        image: chyld/web:6
+        image: chyld/web:10
         env:
         - name: PGPASSWORD
           value: efe6358aa3
@@ -50,7 +50,7 @@ spec:
         volumeMounts:
         - mountPath: /usr/src/app/uploads
           name: photos
-        command: ["./scripts/start-sidekiq.sh"]
+        command: ["./scripts/wait-servers.sh"]
         args: ["sidekiq", "-c", "3"]
 
 ---
@@ -65,13 +65,13 @@ spec:
     spec:
       containers:
       - name: web
-        image: chyld/web:6
+        image: chyld/web:10
         env:
         - name: PGPASSWORD
           value: efe6358aa3
         - name: REDIS_URL
           value: redis://redis:6379/0
-        command: ["./scripts/start-db.sh"]
+        command: ["./scripts/setup-db.sh"]
       restartPolicy: Never
 
 ---
@@ -90,7 +90,7 @@ spec:
     spec:
       containers:
       - name: logger
-        image: chyld/logger:5
+        image: chyld/logger:7
         env:
         - name: PGPASSWORD
           value: efe6358aa3

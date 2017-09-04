@@ -13,6 +13,8 @@ ENV RAILS_ENV "production"
 COPY . /usr/src/app
 WORKDIR /usr/src/app
 
+# rails secret
+ENV SECRET_KEY_BASE "d5d2e920d68aad333854aa06994e1a695e827456dca22bde130eca0643c87b0492c3f79ee0ea466752e44d9334d289f4f9d85429a30afa5d9231ada5180ff656"
 RUN bundle install --without development test
 
 EXPOSE 5555
