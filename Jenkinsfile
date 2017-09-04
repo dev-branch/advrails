@@ -49,6 +49,23 @@ pipeline {
         '''
       }
     }
+    stage('prod-login') {
+      steps {
+        sh '''
+          echo "login to azure container registry"
+          docker login --username=azurechyld --password=$ACR_PASS azurechyld.azurecr.io
+        '''
+      }
+    }
+    stage('prod-push') {
+      steps {
+        sh '''
+          echo "push production docker images to azure container registry"
+          docker push azurechyld.azurecr.io/web:$BUILD_NUMBER
+          docker push azurechyld.azurecr.io/logger:$BUILD_NUMBER
+        '''
+      }
+    }
   }
   post {
     always {
