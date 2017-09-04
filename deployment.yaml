@@ -18,7 +18,7 @@ spec:
           readOnly: false
       containers:
       - name: web
-        image: chyld/web:5
+        image: chyld/web:6
         env:
         - name: PGPASSWORD
           value: efe6358aa3
@@ -33,7 +33,7 @@ spec:
         args: ["rails", "server"]
 
       - name: worker
-        image: chyld/web:5
+        image: chyld/web:6
         env:
         - name: PGPASSWORD
           value: efe6358aa3
@@ -52,6 +52,27 @@ spec:
           name: photos
         command: ["./scripts/start-sidekiq.sh"]
         args: ["sidekiq", "-c", "3"]
+
+---
+
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: j-seed
+  namespace: production
+spec:
+  template:
+    spec:
+      containers:
+      - name: web
+        image: chyld/web:6
+        env:
+        - name: PGPASSWORD
+          value: efe6358aa3
+        - name: REDIS_URL
+          value: redis://redis:6379/0
+        command: ["./scripts/start-db.sh"]
+      restartPolicy: Never
 
 ---
 

@@ -14,4 +14,7 @@ until redis-cli -h redis -r 1 KEYS test; do
 done
 
 >&2 echo "Postgres & Redis are up - executing command(s)"
+rails db:create
+rails db:migrate
+rails db:seed
 exec $cmd

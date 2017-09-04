@@ -19,7 +19,7 @@ services:
      - "3333:3333"
     volumes:
       - "photos:/usr/src/app/uploads"
-    command: ["./scripts/start-dev.sh", "rails", "server"]
+    command: ["./scripts/start-db.sh", "rails", "server"]
 
 ### ----------------------------------------------------------------------- ###
 ### ----------------------------------------------------------------------- ###
