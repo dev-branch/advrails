@@ -9,8 +9,17 @@ pipeline {
         sh '''
           echo "building dev docker compose infrastructure"
           docker-compose build
+        '''
+      }
+    }
+    stage('clean') {
+      steps {
+        sh '''
+          echo "clean up"
           docker system prune -f
           docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)
+          docker images
+          docker ps -a
         '''
       }
     }
@@ -18,8 +27,6 @@ pipeline {
       steps {
         sh '''
           echo "running rspec tests"
-          docker images
-          docker ps -a
           docker-compose run web ./scripts/start-dev.sh rspec -f d
         '''
       }

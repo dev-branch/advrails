@@ -1,4 +1,6 @@
-DatabaseCleaner.clean_with(:truncation)
+if ENV['RAILS_ENV'] != 'production'
+  DatabaseCleaner.clean_with(:truncation)
+end
 
 User.create!(email: 'bob@aol.com', password: 'pass1234')
 User.create!(email: 'sue@aol.com', password: 'pass1234', role: 'teacher')
