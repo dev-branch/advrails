@@ -27,7 +27,7 @@ pipeline {
       steps {
         sh '''
           echo "running rspec tests"
-          docker-compose run web ./scripts/start-db.sh rspec -f d
+          docker-compose run web ./scripts/start-dev.sh rspec -f d
         '''
       }
     }
