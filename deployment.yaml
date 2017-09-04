@@ -23,7 +23,7 @@ spec:
           readOnly: false
       containers:
       - name: web
-        image: chyld/web:10
+        image: azurechyld.azurecr.io/web:$BUILD_NUMBER
         env:
         - name: PGPASSWORD
           valueFrom:
@@ -41,7 +41,7 @@ spec:
         args: ["rails", "server"]
 
       - name: worker
-        image: chyld/web:10
+        image: azurechyld.azurecr.io/web:$BUILD_NUMBER
         env:
         - name: PGPASSWORD
           valueFrom:
@@ -82,7 +82,7 @@ spec:
     spec:
       containers:
       - name: web
-        image: chyld/web:10
+        image: azurechyld.azurecr.io/web:$BUILD_NUMBER
         env:
         - name: PGPASSWORD
           valueFrom:
@@ -113,7 +113,7 @@ spec:
     spec:
       containers:
       - name: logger
-        image: chyld/logger:7
+        image: azurechyld.azurecr.io/logger:$BUILD_NUMBER
         env:
         - name: PGPASSWORD
           valueFrom:

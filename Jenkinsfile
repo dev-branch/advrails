@@ -66,6 +66,14 @@ pipeline {
         '''
       }
     }
+    stage('prod-k8s') {
+      steps {
+        sh '''
+          echo "deploy kubernetes to azure container service"
+          envsubst < deployment.yaml | kubectl apply -f -
+        '''
+      }
+    }
   }
   post {
     always {
@@ -75,7 +83,7 @@ pipeline {
       echo "success"
     }
     failure {
-      echo "failure!"
+      echo "failure"
     }
   }
 }
