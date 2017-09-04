@@ -72,33 +72,6 @@ spec:
 ### -------------------------------------------------------------------------------------------------------------------- ###
 ---
 
-apiVersion: batch/v1
-kind: Job
-metadata:
-  name: j-seed
-  namespace: production
-spec:
-  template:
-    spec:
-      containers:
-      - name: web
-        image: azurechyld.azurecr.io/web:$BUILD_NUMBER
-        env:
-        - name: PGPASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: topsecret
-              key: pgpassword
-        - name: REDIS_URL
-          value: redis://redis:6379/0
-        command: ["./scripts/setup-db.sh"]
-      restartPolicy: Never
-
-### -------------------------------------------------------------------------------------------------------------------- ###
-### -------------------------------------------------------------------------------------------------------------------- ###
-### -------------------------------------------------------------------------------------------------------------------- ###
----
-
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
