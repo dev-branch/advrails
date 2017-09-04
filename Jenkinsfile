@@ -4,7 +4,7 @@ pipeline {
     ACR_PASS = credentials('ACR_PASS')
   }
   stages {
-    stage('build') {
+    stage('dev-build') {
       steps {
         sh '''
           echo "building dev docker compose infrastructure"
@@ -12,7 +12,7 @@ pipeline {
         '''
       }
     }
-    stage('clean') {
+    stage('dev-clean') {
       steps {
         sh '''
           echo "clean up"
@@ -23,11 +23,29 @@ pipeline {
         '''
       }
     }
-    stage('test') {
+    stage('dev-validation') {
       steps {
         sh '''
           echo "running rspec tests"
           docker-compose run web ./scripts/start-dev.sh rspec -f d
+        '''
+      }
+    }
+    stage('prod-build') {
+      steps {
+        sh '''
+          echo "building production docker images"
+          docker build -t azurechyld.azurecr.io/web:$BUILD_NUMBER -f learn/Dockerfile-prod learn/
+          docker build -t azurechyld.azurecr.io/logger:$BUILD_NUMBER -f logger/Dockerfile-prod logger/
+        '''
+      }
+    }
+    stage('prod-clean') {
+      steps {
+        sh '''
+          echo "clean up"
+          docker system prune -f
+          docker images
         '''
       }
     }
