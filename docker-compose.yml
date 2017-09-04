@@ -19,7 +19,7 @@ services:
      - "3333:3333"
     volumes:
       - "photos:/usr/src/app/uploads"
-    command: ["./scripts/start-db.sh", "rails", "server"]
+    command: ["./scripts/start-dev.sh", "rails", "server"]
 
 ### ----------------------------------------------------------------------- ###
 ### ----------------------------------------------------------------------- ###
@@ -38,7 +38,7 @@ services:
       - logger
     volumes:
       - "photos:/usr/src/app/uploads"
-    command: ["./scripts/start-sidekiq.sh", "sidekiq", "-c", "3"]
+    command: ["./scripts/wait-servers.sh", "sidekiq", "-c", "3"]
 
 ### ----------------------------------------------------------------------- ###
 ### ----------------------------------------------------------------------- ###
