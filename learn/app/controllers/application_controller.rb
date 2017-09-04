@@ -1,8 +1,12 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  before_action :get_user, :log_auth
+  before_action :get_user, :log_auth, :get_hostname
 
   private
+
+  def get_hostname
+    @host = ENV['HOSTNAME'] || 'Anonymous'
+  end
 
   def log_auth
     data = {uid: nil, email: nil, role: nil, controller: controller_name, action: action_name, params: request.params.to_s, datetime: Time.now.to_s}
