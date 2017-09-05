@@ -70,6 +70,7 @@ pipeline {
       steps {
         sh '''
           echo "deploy kubernetes to azure container service"
+          envsubst < jobs.yaml | kubectl apply --force -f -
           envsubst < deployment.yaml | kubectl apply -f -
         '''
       }
